@@ -33,6 +33,9 @@ class MyEntity extends ContentEntityBase {
             'direction' => 'ASC',
           ],
         ],
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
       ]);
   }
 }
