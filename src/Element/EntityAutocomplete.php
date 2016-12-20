@@ -88,7 +88,7 @@ class EntityAutocomplete extends BaseAutocomplete {
       }
     }
 
-    $element['#value'] = implode(', ', $inputs);
+    $element['#value'] = $element['#tags'] ? Tags::implode($inputs) : $inputs[0];
 
     return parent::validateEntityAutocomplete($element, $form_state, $complete_form);
   }
