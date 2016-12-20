@@ -1,5 +1,5 @@
 finto_taxonomy.entity_autocomplete:
-  path: '/finto_taxonomy/{target_type}/{selection_handler}/{selection_settings_key}'
+  path: '/finto_taxonomy/{target_type}/{selection_handler}/{selection_settings_key}/{finto_vocabulary}'
   defaults:
     _controller: '\Drupal\finto_taxonomy\Controller\FintoAutocompleteController::handleAutocomplete'
   requirements:

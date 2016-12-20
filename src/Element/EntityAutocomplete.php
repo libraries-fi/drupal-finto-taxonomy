@@ -103,6 +103,7 @@ class EntityAutocomplete extends BaseAutocomplete {
 
   public static function processFintoAutocomplete(array &$element, FormStateInterface $form_state, array &$complete_form) {
     $element['#autocomplete_route_name'] = 'finto_taxonomy.entity_autocomplete';
+    $element['#autocomplete_route_parameters']['finto_vocabulary'] = $element['#selection_settings']['finto_vocabulary'];
     return $element;
   }
 }

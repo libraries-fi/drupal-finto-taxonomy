@@ -2,6 +2,7 @@
 
 namespace Drupal\finto_taxonomy;
 
+use Drupal;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Entity\EntityAutocompleteMatcher;
 use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
@@ -15,8 +16,6 @@ class FintoAutocompleteMatcher extends EntityAutocompleteMatcher {
   protected $manager;
 
   private $url = 'https://api.finto.fi/rest/v1/search';
-  private $vocabulary = 'yso';
-  private $lang = 'fi';
 
   public function __construct(SelectionPluginManagerInterface $selection_manager, HttpClient $http_client, TaxonomyHelper $manager) {
     parent::__construct($selection_manager);
@@ -32,10 +31,13 @@ class FintoAutocompleteMatcher extends EntityAutocompleteMatcher {
   }
 
   protected function queryFinto($query) {
+    $vocabulary = Drupal::routeMatch()->getParameter('finto_vocabulary');
+    $language = Drupal::languageManager()->getCurrentLanguage()->getId();
+
     $url = Url::fromUri($this->url, [
       'query' => [
-        'vocab' => $this->vocabulary,
-        'lang' => $this->lang,
+        'vocab' => $vocabulary,
+        'lang' => $language,
         'query' => $query . '*',
       ]
     ]);
