@@ -32,63 +32,63 @@ class EntityAutocomplete extends BaseAutocomplete {
   /**
    * Validates the autocomplete input.
    *
-   * NOTE: This implementation allows only one value per input field. If the given value does not
-   * contain a valid Finto term ID (e.g. 'p12345'), validation is passed to the parent class'
-   * implementation.
+   * If new Finto terms are found in the input, the widget will create or update the corresponding
+   * taxonomy term entries and then passes control to the parent implementation, which takes care
+   * of actual validation.
    */
   public static function validateEntityAutocomplete(array &$element, FormStateInterface $form_state, array &$complete_form) {
     $cache = Drupal::service('cache.finto_taxonomy');
     $vocabulary = $element['#selection_settings']['finto_vocabulary'];
     $langcode = $form_state->getFormObject()->getFormLangcode($form_state);
     $storage = Drupal::entityTypeManager()->getStorage('taxonomy_term');
+    $inputs = $element['#tags'] ? Tags::explode($element['#value']) : [$element['#value']];
 
-    if ($element['#tags']) {
-      $form_state->setError($element, t('This widget does not support tags-mode.'));
-      return;
-    }
+    foreach ($inputs as $i => $input) {
+      $finto_id = static::extractFintoIdFromAutocompleteInput($input);
 
-    $finto_id = static::extractFintoIdFromAutocompleteInput($element['#value']);
+      if ($finto_id) {
+        $cache_id = TaxonomyHelper::termCacheId($finto_id, $vocabulary, $langcode);
+        $item = $cache->get($cache_id, TRUE);
 
-    if ($finto_id) {
-      $cache_id = TaxonomyHelper::termCacheId($finto_id, $vocabulary, $langcode);
-      $item = $cache->get($cache_id, TRUE);
-
-      if (!$item) {
-        /*
-         * This is a lazy way for handling cache mismatches. Should rather pull the data again
-         * from the API. Expiration time is set to one hour but items can be lost when an admin
-         * flushes the system caches.
-         */
-        $form_state->setError($element, t('Cached entry was not found.'));
-        return;
-      }
-
-      $result = $storage->loadByProperties([
-        'vid' => TaxonomyHelper::VOCABULARY_ID,
-        'finto_url' => $item->data->uri
-      ]);
-
-      if ($result) {
-        $term = reset($result);
-        if (!$term->hasTranslation($langcode)) {
-          $storage->createTranslation($term, $langcode, [
-            'name' => $item->data->prefLabel,
-          ]);
+        if (!$item) {
+          /*
+           * This is a lazy way for handling cache mismatches. Should rather pull the data again
+           * from the API. Expiration time is set to one hour but items can be lost when an admin
+           * flushes the system caches.
+           */
+          $form_state->setError($element, t('Cached entry was not found.'));
+          return;
         }
-      } else {
-        $term = $storage->create([
-          'vid' => TaxonomyHelper::VOCABULARY_ID,
-          'name' => $item->data->prefLabel,
-          'finto_url' => $item->data->uri,
-          'finto_vid' => $item->data->vocab,
-          'langcode' => $langcode,
-        ]);
-        $term->save();
-      }
 
-      $translation = $term->getTranslation($langcode);
-      $element['#value'] = sprintf('%s (%d)', $term->label(), $term->id());
+        $result = $storage->loadByProperties([
+          'vid' => TaxonomyHelper::VOCABULARY_ID,
+          'finto_url' => $item->data->uri
+        ]);
+
+        if ($result) {
+          $term = reset($result);
+          if (!$term->hasTranslation($langcode)) {
+            $storage->createTranslation($term, $langcode, [
+              'name' => $item->data->prefLabel,
+            ]);
+          }
+        } else {
+          $term = $storage->create([
+            'vid' => TaxonomyHelper::VOCABULARY_ID,
+            'name' => $item->data->prefLabel,
+            'finto_url' => $item->data->uri,
+            'finto_vid' => $item->data->vocab,
+            'langcode' => $langcode,
+          ]);
+          $term->save();
+        }
+
+        $translation = $term->getTranslation($langcode);
+        $inputs[$i] = sprintf('%s (%d)', $term->label(), $term->id());
+      }
     }
+
+    $element['#value'] = implode(', ', $inputs);
 
     return parent::validateEntityAutocomplete($element, $form_state, $complete_form);
   }
