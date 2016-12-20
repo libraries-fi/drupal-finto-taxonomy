@@ -1,0 +1,27 @@
+uuid: b6eb8e59-f44e-4835-804b-9b5ff57af58b
+langcode: fi
+status: true
+dependencies:
+  module:
+    - options
+    - taxonomy
+id: taxonomy_term.finto_vid
+field_name: finto_vid
+entity_type: taxonomy_term
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: yso
+      label: YSO
+    -
+      value: ysa
+      label: YSA
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

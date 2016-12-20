@@ -1,0 +1,23 @@
+uuid: e41feb5c-9ef3-4b73-b6ca-34a567219f50
+langcode: fi
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.finto_vid
+    - taxonomy.vocabulary.finto
+  module:
+    - options
+id: taxonomy_term.finto.finto_vid
+field_name: finto_vid
+entity_type: taxonomy_term
+bundle: finto
+label: Sanasto
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: yso
+default_value_callback: ''
+settings: {  }
+field_type: list_string

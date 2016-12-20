@@ -1,0 +1,23 @@
+uuid: c7c85d6b-80fd-40cd-a8c1-49c33503a43a
+langcode: fi
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.finto_url
+    - taxonomy.vocabulary.finto
+  module:
+    - link
+id: taxonomy_term.finto.finto_url
+field_name: finto_url
+entity_type: taxonomy_term
+bundle: finto
+label: 'Finto URL'
+description: 'Rajapinnan palauttama url-muotoinen tunniste termille.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

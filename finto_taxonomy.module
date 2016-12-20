@@ -1,0 +1,18 @@
+<?php
+
+use Drupal\Core\Entity\Element\EntityAutocomplete;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\finto_taxonomy\TaxonomyHelper;
+use Drupal\finto_taxonomy\Controller\FintoAutocompleteController;
+use Drupal\finto_taxonomy\Element\EntityAutocomplete as FintoEntityAutocomplete;
+
+function finto_taxonomy_field_widget_form_alter(array &$parent, FormStateInterface $form_state, $context) {
+  // Autocomplete widget wraps the actual widgets inside a redundant array.
+  if (empty($parent['target_id'])) {
+    return;
+  }
+
+  if (TaxonomyHelper::elementAllowsFintoAutocomplete($parent['target_id'])) {
+    $parent['target_id']['#type'] = 'finto_taxonomy_autocomplete';
+  }
+}

@@ -1,0 +1,46 @@
+uuid: 22f70470-d513-4757-a297-fc5c8cfaaffb
+langcode: fi
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.finto.finto_url
+    - field.field.taxonomy_term.finto.finto_vid
+    - taxonomy.vocabulary.finto
+  module:
+    - link
+id: taxonomy_term.finto.default
+targetEntityType: taxonomy_term
+bundle: finto
+mode: default
+content:
+  finto_url:
+    weight: 1
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+  finto_vid:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  langcode:
+    type: language_select
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 4
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  path: true

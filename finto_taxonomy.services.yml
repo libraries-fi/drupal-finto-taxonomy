@@ -1,0 +1,15 @@
+services:
+  finto_taxonomy.autocomplete_matcher:
+    class: Drupal\finto_taxonomy\FintoAutocompleteMatcher
+    arguments: ['@plugin.manager.entity_reference_selection', '@http_client', '@finto_taxonomy.helper']
+
+  finto_taxonomy.helper:
+    class: Drupal\finto_taxonomy\TaxonomyHelper
+    arguments: ['@cache.finto_taxonomy']
+
+  cache.finto_taxonomy:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+      - { name: cache.bin }
+    factory: cache_factory:get
+    arguments: [finto_taxonomy]

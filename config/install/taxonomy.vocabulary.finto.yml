@@ -1,0 +1,9 @@
+uuid: 65da3175-fb16-4faf-abed-20f456dc7a37
+langcode: fi
+status: true
+dependencies: {  }
+name: Finto
+vid: finto
+description: 'Finto-sanastojen sanat.'
+hierarchy: 0
+weight: 0

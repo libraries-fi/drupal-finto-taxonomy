@@ -1,0 +1,9 @@
+name: Finto Taxonomy
+type: module
+core: 8.x
+package: Kirjastot.fi
+description: "Integrate querying Finto vocabularies with taxonomy"
+dependencies:
+  - field
+  - language
+  - taxonomy

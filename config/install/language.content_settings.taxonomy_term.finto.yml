@@ -1,0 +1,16 @@
+uuid: c069fceb-0d0f-4d69-9183-77586191d8f5
+langcode: fi
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.finto
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.finto
+target_entity_type_id: taxonomy_term
+target_bundle: finto
+default_langcode: site_default
+language_alterable: true
