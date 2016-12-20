@@ -64,6 +64,7 @@ class FintoAutocompleteMatcher extends EntityAutocompleteMatcher {
 
     foreach ($finto as $item) {
       if (!in_array($item['label'], $cache)) {
+        $cache[] = $item['label'];
         $existing[] = $item;
       }
     }
