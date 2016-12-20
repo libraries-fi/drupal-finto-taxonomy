@@ -63,7 +63,10 @@ class EntityAutocomplete extends BaseAutocomplete {
         return;
       }
 
-      $result = $storage->loadByProperties(['finto_url' => $item->data->uri]);
+      $result = $storage->loadByProperties([
+        'vid' => TaxonomyHelper::VOCABULARY_ID,
+        'finto_url' => $item->data->uri
+      ]);
 
       if ($result) {
         $term = reset($result);
