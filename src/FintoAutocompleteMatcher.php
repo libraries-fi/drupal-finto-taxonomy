@@ -49,7 +49,11 @@ class FintoAutocompleteMatcher extends EntityAutocompleteMatcher {
     $this->manager->setCachedFintoItems($data);
 
     foreach ($data as $item) {
-      $label = empty($item->altLabel) ? $item->prefLabel : $item->altLabel;
+      if (empty($item->altLabel)) {
+        $label = $item->prefLabel;
+      } else {
+        $label = sprintf('<i>%s</i> → <b>%s</b>', $item->altLabel, $item->prefLabel);
+      }
       $matches[] = [
         'label' => $label,
         'value' => sprintf('%s (%s)', $label, $item->localname),
