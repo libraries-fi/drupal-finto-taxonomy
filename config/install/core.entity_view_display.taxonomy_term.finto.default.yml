@@ -1,4 +1,4 @@
-uuid: 32ffdc2f-a8f5-4140-aa89-2d421abcb46e
+uuid: 22f70470-d513-4757-a297-fc5c8cfaaffb
 langcode: fi
 status: true
 dependencies:
@@ -8,35 +8,7 @@ dependencies:
     - taxonomy.vocabulary.finto
   module:
     - link
-    - options
-    - text
 id: taxonomy_term.finto.default
+label: null
 targetEntityType: taxonomy_term
-bundle: finto
-mode: default
-content:
-  description:
-    label: hidden
-    type: text_default
-    weight: 0
-    settings: {  }
-    third_party_settings: {  }
-  finto_url:
-    weight: 1
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    type: link
-  finto_vid:
-    weight: 2
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    type: list_default
-hidden:
-  langcode: true
+cache: true

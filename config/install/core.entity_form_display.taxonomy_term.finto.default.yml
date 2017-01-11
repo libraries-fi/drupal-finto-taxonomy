@@ -3,6 +3,7 @@ langcode: fi
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.finto.finto_id
     - field.field.taxonomy_term.finto.finto_url
     - field.field.taxonomy_term.finto.finto_vid
     - taxonomy.vocabulary.finto
@@ -13,21 +14,28 @@ targetEntityType: taxonomy_term
 bundle: finto
 mode: default
 content:
+  finto_id:
+    type: string_textfield
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   finto_url:
+    type: link_default
     weight: 1
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
-    type: link_default
   finto_vid:
-    weight: 2
+    type: options_select
+    weight: 3
     settings: {  }
     third_party_settings: {  }
-    type: options_select
   langcode:
     type: language_select
-    weight: 3
+    weight: 4
     settings: {  }
     third_party_settings: {  }
   name:
@@ -38,7 +46,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 4
+    weight: 5
     settings: {  }
     third_party_settings: {  }
 hidden:
