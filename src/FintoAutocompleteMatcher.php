@@ -3,6 +3,7 @@
 namespace Drupal\finto_taxonomy;
 
 use Drupal;
+use Drupal\Component\Utility\Html;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Entity\EntityAutocompleteMatcher;
 use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
@@ -50,13 +51,13 @@ class FintoAutocompleteMatcher extends EntityAutocompleteMatcher {
 
     foreach ($data as $item) {
       if (empty($item->altLabel)) {
-        $label = $item->prefLabel;
+        $label = Html::escape($item->prefLabel);
       } else {
-        $label = sprintf('<i>%s</i> → <b>%s</b>', $item->altLabel, $item->prefLabel);
+        $label = sprintf('<i>%s</i> → <b>%s</b>', Html::escape($item->altLabel), Html::escape($item->prefLabel));
       }
       $matches[] = [
         'label' => $label,
-        'value' => sprintf('%s (%s)', $label, $item->localname),
+        'value' => sprintf('%s (%s)', Html::escape($item->prefLabel), Html::escape($item->localname)),
       ];
     }
 
