@@ -110,11 +110,18 @@ class EntityAutocomplete extends BaseAutocomplete {
     // When strict mode forced, use custom matcher that allows matches against 'finto' vocabulary only.
     if (!empty($element['#selection_settings']['finto_autocomplete_strict'])) {
       $handler = 'finto_taxonomy_strict:taxonomy_term';
-      $element['#autocomplete_route_parameters']['selection_handler'] = $handler;
 
       // The controller checks this hash for security, so we need to re-calculate it.
       $data = serialize($element['#selection_settings']) . $element['#target_type'] . $handler;
-      $element['#autocomplete_route_parameters']['selection_settings_key'] = Crypt::hmacBase64($data, Settings::getHashSalt());
+      $selection_settings_key = Crypt::hmacBase64($data, Settings::getHashSalt());
+
+      $element['#autocomplete_route_parameters']['selection_handler'] = $handler;
+      $element['#autocomplete_route_parameters']['selection_settings_key'] = $selection_settings_key;
+
+      $key_value_storage = \Drupal::keyValue('entity_autocomplete');
+      if (!$key_value_storage->has($selection_settings_key)) {
+        $key_value_storage->set($selection_settings_key, $element['#selection_settings']);
+      }
     }
 
     return $element;

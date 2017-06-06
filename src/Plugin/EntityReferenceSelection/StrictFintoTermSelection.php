@@ -18,8 +18,8 @@ use Drupal\taxonomy\Plugin\EntityReferenceSelection\TermSelection;
  *   id = "finto_taxonomy_strict:taxonomy_term",
  *   label = @Translation("Strict Finto selection"),
  *   entity_types = {"taxonomy_term"},
- *   group = "default",
- *   weight = 1
+ *   group = "finto_taxonomy_strict",
+ *   weight = 1000
  * )
  */
 class StrictFintoTermSelection extends TermSelection {
