@@ -93,11 +93,6 @@ class EntityAutocomplete extends BaseAutocomplete {
     return parent::validateEntityAutocomplete($element, $form_state, $complete_form);
   }
 
-  protected static function createTerm(array $values) {
-    $storage = Drupal::entityTypeManager()->getStorage('taxonomy_term');
-
-  }
-
   public static function extractFintoIdFromAutocompleteInput($input) {
     if (preg_match('/.+\s\((p\d+)\)/', $input, $matches)) {
       return $matches[1];
