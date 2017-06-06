@@ -8,6 +8,10 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Entity\Element\EntityAutocomplete as BaseAutocomplete;
 use Drupal\finto_taxonomy\TaxonomyHelper;
 
+use Drupal\Component\Utility\Crypt;
+use Drupal\Core\Site\Settings;
+
+
 /**
  * @FormElement("finto_taxonomy_autocomplete")
  */
@@ -102,6 +106,17 @@ class EntityAutocomplete extends BaseAutocomplete {
   public static function processFintoAutocomplete(array &$element, FormStateInterface $form_state, array &$complete_form) {
     $element['#autocomplete_route_name'] = 'finto_taxonomy.entity_autocomplete';
     $element['#autocomplete_route_parameters']['finto_vocabulary'] = $element['#selection_settings']['finto_vocabulary'];
+
+    // When strict mode forced, use custom matcher that allows matches against 'finto' vocabulary only.
+    if (!empty($element['#selection_settings']['finto_autocomplete_strict'])) {
+      $handler = 'finto_taxonomy_strict:taxonomy_term';
+      $element['#autocomplete_route_parameters']['selection_handler'] = $handler;
+
+      // The controller checks this hash for security, so we need to re-calculate it.
+      $data = serialize($element['#selection_settings']) . $element['#target_type'] . $handler;
+      $element['#autocomplete_route_parameters']['selection_settings_key'] = Crypt::hmacBase64($data, Settings::getHashSalt());
+    }
+
     return $element;
   }
 }
