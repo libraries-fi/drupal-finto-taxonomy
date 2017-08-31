@@ -45,7 +45,12 @@ class EntityAutocomplete extends BaseAutocomplete {
     $vocabulary = $element['#selection_settings']['finto_vocabulary'];
     $langcode = $form_state->getFormObject()->getFormLangcode($form_state);
     $storage = Drupal::entityTypeManager()->getStorage('taxonomy_term');
-    $inputs = $element['#tags'] ? Tags::explode($element['#value']) : [$element['#value']];
+
+    if (is_array($element['#value'])) {
+      $inputs = $element['#value'];
+    } else {
+      $inputs = $element['#tags'] ? Tags::explode($element['#value']) : [$element['#value']];
+    }
 
     foreach ($inputs as $i => $input) {
       $finto_id = static::extractFintoIdFromAutocompleteInput($input);

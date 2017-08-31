@@ -9,6 +9,5 @@ dependencies:
   module:
     - link
 id: taxonomy_term.finto.default
-label: null
 targetEntityType: taxonomy_term
 cache: true
