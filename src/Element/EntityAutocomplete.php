@@ -19,13 +19,11 @@ class EntityAutocomplete extends BaseAutocomplete {
   public function getInfo() {
     $info = parent::getInfo();
     $class = get_class($this);
-
-    $process = [$class, 'processFintoAutocomplete'];
     $stack = &$info['#process'];
 
     foreach ($stack as $i => $callable) {
       if (is_a($callable[0], $class, true) && $callable[1] == 'processAutocomplete') {
-        array_splice($stack, $i, 0, [$process]);
+        array_splice($stack, $i, 0, [[$class, 'processFintoAutocomplete']]);
         break;
       }
     }
@@ -81,7 +79,7 @@ class EntityAutocomplete extends BaseAutocomplete {
               'name' => $item->data->prefLabel,
             ]);
           }
-        } else {
+        } elseif ($element['#autocreate']) {
           $term = $storage->create([
             'vid' => TaxonomyHelper::VOCABULARY_ID,
             'name' => $item->data->prefLabel,
