@@ -4,7 +4,11 @@
   color: black;
 
   > button {
-    background-color: #569c95;
+    background-color: #569c95 !important;
     color: black;
+
+    &:hover {
+      background-color: #3f7d77 !important;
+    }
   }
 }

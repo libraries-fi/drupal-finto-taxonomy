@@ -6,6 +6,10 @@
 }
 /* line 6, ../scss/kifiform-tags-plugin.scss */
 .finto-taxonomy-tag > button {
-  background-color: #569c95;
+  background-color: #569c95 !important;
   color: black;
+}
+/* line 10, ../scss/kifiform-tags-plugin.scss */
+.finto-taxonomy-tag > button:hover {
+  background-color: #3f7d77 !important;
 }
