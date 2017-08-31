@@ -1,0 +1,11 @@
+/* line 1, ../scss/kifiform-tags-plugin.scss */
+.finto-taxonomy-tag {
+  background-color: #83CFC8 !important;
+  border-color: #569c95 !important;
+  color: black;
+}
+/* line 6, ../scss/kifiform-tags-plugin.scss */
+.finto-taxonomy-tag > button {
+  background-color: #569c95;
+  color: black;
+}

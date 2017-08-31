@@ -13,6 +13,17 @@ function finto_taxonomy_field_widget_form_alter(array &$parent, FormStateInterfa
   }
 
   if (TaxonomyHelper::elementAllowsFintoAutocomplete($parent['target_id'])) {
+    $finto_vid = 'finto';
     $parent['target_id']['#type'] = 'finto_taxonomy_autocomplete';
+
+    $finto_tids = [];
+
+    foreach ($parent['target_id']['#default_value'] as $term) {
+      if ($term->getVocabularyId() == $finto_vid) {
+        $finto_tids[] = $term->id();
+      }
+    }
+
+    $parent['target_id']['#attributes']['data-finto_taxonomy-terms'] = implode(',', $finto_tids);
   }
 }

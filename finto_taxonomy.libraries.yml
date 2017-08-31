@@ -1,0 +1,8 @@
+kifiform-tags-plugin:
+  css:
+    component:
+      public/css/kifiform-tags-plugin.css: {}
+  js:
+    public/js/kifiform-tags-plugin.js: {}
+  dependencies:
+    - kifiform/autocomplete-tags
