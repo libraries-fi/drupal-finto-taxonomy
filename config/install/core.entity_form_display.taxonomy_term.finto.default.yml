@@ -9,6 +9,9 @@ dependencies:
     - taxonomy.vocabulary.finto
   module:
     - link
+    - path
+_core:
+  default_config_hash: zL_G5SOOU9esouPKBSelXPetEE0b63aTDk7gvLO3LUk
 id: taxonomy_term.finto.default
 targetEntityType: taxonomy_term
 bundle: finto
@@ -21,23 +24,28 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
   finto_url:
-    type: link_default
     weight: 1
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
+    type: link_default
+    region: content
   finto_vid:
-    type: options_select
     weight: 3
     settings: {  }
     third_party_settings: {  }
+    type: options_select
+    region: content
   langcode:
     type: language_select
     weight: 4
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
+    region: content
   name:
     type: string_textfield
     weight: 0
@@ -45,10 +53,17 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
+  path:
+    type: path
+    weight: 6
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   translation:
     weight: 5
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   description: true
-  path: true

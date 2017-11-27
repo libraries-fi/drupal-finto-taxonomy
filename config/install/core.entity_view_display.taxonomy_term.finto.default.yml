@@ -1,13 +1,30 @@
-uuid: 22f70470-d513-4757-a297-fc5c8cfaaffb
+uuid: 32ffdc2f-a8f5-4140-aa89-2d421abcb46e
 langcode: fi
 status: true
 dependencies:
   config:
+    - field.field.taxonomy_term.finto.finto_id
     - field.field.taxonomy_term.finto.finto_url
     - field.field.taxonomy_term.finto.finto_vid
     - taxonomy.vocabulary.finto
   module:
-    - link
+    - text
+_core:
+  default_config_hash: LCaaAegs2LxKpsOMFQ85hUpgvHPSKO-AxecXW2txYsw
 id: taxonomy_term.finto.default
 targetEntityType: taxonomy_term
-cache: true
+bundle: finto
+mode: default
+content:
+  description:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  finto_id: true
+  finto_url: true
+  finto_vid: true
+  langcode: true
