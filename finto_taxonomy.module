@@ -6,6 +6,8 @@ use Drupal\finto_taxonomy\TaxonomyHelper;
 use Drupal\finto_taxonomy\Controller\FintoAutocompleteController;
 use Drupal\finto_taxonomy\Element\EntityAutocomplete as FintoEntityAutocomplete;
 
+use Drupal\finto_taxonomy\Plugin\LanguageNegotiation\AutoCompleteRoute;
+
 function finto_taxonomy_field_widget_form_alter(array &$parent, FormStateInterface $form_state, $context) {
   // Autocomplete widget wraps the actual widgets inside a redundant array.
   if (empty($parent['target_id'])) {
@@ -26,4 +28,9 @@ function finto_taxonomy_field_widget_form_alter(array &$parent, FormStateInterfa
 
     $parent['target_id']['#attributes']['data-finto_taxonomy-terms'] = implode(',', $finto_tids);
   }
+}
+
+function finto_taxonomy_language_negotiation_info_alter(&$negotiation_info) {
+  $method_id = \Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl::METHOD_ID;
+  $negotiation_info[$method_id]['class'] = AutoCompleteRoute::class;
 }

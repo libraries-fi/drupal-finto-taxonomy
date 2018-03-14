@@ -10,7 +10,9 @@ use Drupal\finto_taxonomy\TaxonomyHelper;
 
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Site\Settings;
+use Drupal\Core\Language\LanguageInterface;
 
+use Drupal\finto_taxonomy\Plugin\LanguageNegotiation\AutoCompleteRoute;
 
 /**
  * @FormElement("finto_taxonomy_autocomplete")
@@ -109,6 +111,10 @@ class EntityAutocomplete extends BaseAutocomplete {
   public static function processFintoAutocomplete(array &$element, FormStateInterface $form_state, array &$complete_form) {
     $element['#autocomplete_route_name'] = 'finto_taxonomy.entity_autocomplete';
     $element['#autocomplete_route_parameters']['finto_vocabulary'] = $element['#selection_settings']['finto_vocabulary'];
+
+    $q = AutoCompleteRoute::QUERY_PARAMETER;
+    $langcode = Drupal::languageManager()->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)->getId();
+    $element['#autocomplete_route_parameters'][$q] = $langcode;
 
     // When strict mode forced, use custom matcher that allows matches against 'finto' vocabulary only.
     if (!empty($element['#selection_settings']['finto_autocomplete_strict'])) {

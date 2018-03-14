@@ -7,6 +7,7 @@ use Drupal\Component\Utility\Html;
 use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Entity\EntityAutocompleteMatcher;
 use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
 use Drupal\finto_taxonomy\TaxonomyHelper;
 use GuzzleHttp\Client as HttpClient;
@@ -33,12 +34,12 @@ class FintoAutocompleteMatcher extends EntityAutocompleteMatcher {
 
   protected function queryFinto($query) {
     $vocabulary = Drupal::routeMatch()->getParameter('finto_vocabulary');
-    $language = Drupal::languageManager()->getCurrentLanguage()->getId();
+    $langcode = Drupal::request()->query->get('langcode');
 
     $url = Url::fromUri($this->url, [
       'query' => [
         'vocab' => $vocabulary,
-        'lang' => $language,
+        'lang' => $langcode,
         'query' => $query . '*',
       ]
     ]);
