@@ -30,6 +30,6 @@ class AutoCompleteRoute extends LanguageNegotiationUrl
             }
         }
 
-        return parent::getLangcode();
+        return parent::getLangcode($request);
     }
 }
