@@ -1,0 +1,6 @@
+{
+  "name": "libraries-fi/content_perms",
+  "description": "Hack for changing content permissions on a content type level.",
+  "type": "drupal-module",
+  "license": "GPL-2.0+"
+}
