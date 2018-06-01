@@ -77,9 +77,10 @@ class EntityAutocomplete extends BaseAutocomplete {
         if ($result) {
           $term = reset($result);
           if (!$term->hasTranslation($langcode)) {
-            $storage->createTranslation($term, $langcode, [
+            $translation = $term->addTranslation($langcode, [
               'name' => $item->data->prefLabel,
             ]);
+            $translation->save();
           }
         } elseif ($element['#autocreate']) {
           $term = $storage->create([
