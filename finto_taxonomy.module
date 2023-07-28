@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\Core\Entity\Element\EntityAutocomplete;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\finto_taxonomy\TaxonomyHelper;
@@ -8,7 +9,7 @@ use Drupal\finto_taxonomy\Element\EntityAutocomplete as FintoEntityAutocomplete;
 
 use Drupal\finto_taxonomy\Plugin\LanguageNegotiation\AutoCompleteRoute;
 
-function finto_taxonomy_field_widget_form_alter(array &$parent, FormStateInterface $form_state, $context) {
+function finto_taxonomy_field_widget_single_element_form_alter(array &$parent, FormStateInterface $form_state, $context) {
   // Autocomplete widget wraps the actual widgets inside a redundant array.
   if (empty($parent['target_id'])) {
     return;
@@ -21,7 +22,7 @@ function finto_taxonomy_field_widget_form_alter(array &$parent, FormStateInterfa
     $finto_tids = [];
 
     foreach ($parent['target_id']['#default_value'] as $term) {
-      if ($term->getVocabularyId() == $finto_vid) {
+      if ($term->bundle() == $finto_vid) {
         $finto_tids[] = $term->id();
       }
     }
@@ -31,6 +32,6 @@ function finto_taxonomy_field_widget_form_alter(array &$parent, FormStateInterfa
 }
 
 function finto_taxonomy_language_negotiation_info_alter(&$negotiation_info) {
-  $method_id = \Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl::METHOD_ID;
+  $method_id = LanguageNegotiationUrl::METHOD_ID;
   $negotiation_info[$method_id]['class'] = AutoCompleteRoute::class;
 }
