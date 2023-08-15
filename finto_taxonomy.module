@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
 use Drupal\Core\Entity\Element\EntityAutocomplete;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\finto_taxonomy\TaxonomyHelper;
@@ -31,6 +32,6 @@ function finto_taxonomy_field_widget_form_alter(array &$parent, FormStateInterfa
 }
 
 function finto_taxonomy_language_negotiation_info_alter(&$negotiation_info) {
-  $method_id = \Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl::METHOD_ID;
+  $method_id = LanguageNegotiationUrl::METHOD_ID;
   $negotiation_info[$method_id]['class'] = AutoCompleteRoute::class;
 }
