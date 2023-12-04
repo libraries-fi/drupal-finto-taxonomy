@@ -1,8 +1,7 @@
 (function($) {
   "use strict";
 
-  $("input.form-autocomplete")
-    .once("finto-taxonomy-tag-insert")
+  $(once("finto-taxonomy-tag-insert", "input.form-autocomplete"))
     .on("kififormtaginsert", function(event, ui) {
       var tids = ui.autocomplete[0].dataset.finto_taxonomyTerms.split(/,/);
 

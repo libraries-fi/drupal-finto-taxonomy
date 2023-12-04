@@ -6,3 +6,5 @@ kifiform-tags-plugin:
     public/js/kifiform-tags-plugin.js: {}
   dependencies:
     - kifiform/autocomplete-tags
+    - core/jquery
+    - core/once
