@@ -22,7 +22,7 @@ function finto_taxonomy_field_widget_single_element_form_alter(array &$parent, F
     $finto_tids = [];
 
     foreach ($parent['target_id']['#default_value'] as $term) {
-      if ($term->getVocabularyId() == $finto_vid) {
+      if ($term->bundle() == $finto_vid) {
         $finto_tids[] = $term->id();
       }
     }
