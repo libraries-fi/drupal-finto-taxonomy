@@ -9,7 +9,7 @@ use Drupal\finto_taxonomy\Element\EntityAutocomplete as FintoEntityAutocomplete;
 
 use Drupal\finto_taxonomy\Plugin\LanguageNegotiation\AutoCompleteRoute;
 
-function finto_taxonomy_field_widget_form_alter(array &$parent, FormStateInterface $form_state, $context) {
+function finto_taxonomy_field_widget_single_element_form_alter(array &$parent, FormStateInterface $form_state, $context) {
   // Autocomplete widget wraps the actual widgets inside a redundant array.
   if (empty($parent['target_id'])) {
     return;
