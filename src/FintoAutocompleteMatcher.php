@@ -44,7 +44,13 @@ class FintoAutocompleteMatcher extends EntityAutocompleteMatcher {
       ]
     ]);
 
-    $response = $this->httpClient->get($url->toString());
+    $response = $this->httpClient->get($url->toString(), [
+      'headers' => [
+        'Accept' => 'application/json',
+        'User-Agent' => 'Kirjastot.fi-FintoClient/1.0',
+      ],
+    ]);
+
     $data = json_decode($response->getBody())->results;
     $matches = [];
 
