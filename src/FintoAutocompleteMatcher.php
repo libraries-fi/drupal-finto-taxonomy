@@ -4,10 +4,10 @@ namespace Drupal\finto_taxonomy;
 
 use Drupal;
 use Drupal\Component\Utility\Html;
-use Drupal\Core\Cache\CacheBackendInterface;
+
 use Drupal\Core\Entity\EntityAutocompleteMatcher;
 use Drupal\Core\Entity\EntityReferenceSelection\SelectionPluginManagerInterface;
-use Drupal\Core\Language\LanguageInterface;
+
 use Drupal\Core\Url;
 use Drupal\finto_taxonomy\TaxonomyHelper;
 use GuzzleHttp\Client as HttpClient;

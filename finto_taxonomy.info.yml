@@ -1,7 +1,6 @@
 name: Finto Taxonomy
 type: module
-core: 8.x
-core_version_requirement: ">=8"
+core_version_requirement: ^10.3 || ^11
 package: Kirjastot.fi
 description: "Integrate querying Finto vocabularies with taxonomy"
 dependencies:

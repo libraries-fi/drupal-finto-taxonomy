@@ -1,11 +1,10 @@
 <?php
 
 use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
-use Drupal\Core\Entity\Element\EntityAutocomplete;
+
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\finto_taxonomy\TaxonomyHelper;
-use Drupal\finto_taxonomy\Controller\FintoAutocompleteController;
-use Drupal\finto_taxonomy\Element\EntityAutocomplete as FintoEntityAutocomplete;
+
 
 use Drupal\finto_taxonomy\Plugin\LanguageNegotiation\AutoCompleteRoute;
 

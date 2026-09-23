@@ -27,7 +27,7 @@ use Drupal\taxonomy\Plugin\EntityReferenceSelection\TermSelection;
  * )
  */
 class StrictFintoTermSelection extends TermSelection {
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, AccountInterface $current_user, EntityFieldManagerInterface $entity_field_manager = NULL, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, EntityRepositoryInterface $entity_repository = NULL) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, ModuleHandlerInterface $module_handler, AccountInterface $current_user, ?EntityFieldManagerInterface $entity_field_manager = NULL, ?EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, ?EntityRepositoryInterface $entity_repository = NULL) {
     // Vocabulary always forced to 'finto'.
     
     $configuration['target_bundles'] = ['finto' => 'finto'];

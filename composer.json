@@ -2,5 +2,9 @@
   "name": "libraries-fi/finto_taxonomy",
   "description": "Hack for changing content permissions on a content type level.",
   "type": "drupal-module",
-  "license": "GPL-2.0+"
+  "license": "GPL-2.0+",
+  "require": {
+    "php": ">=8.3",
+    "drupal/core": "^10.3 || ^11"
+  }
 }
